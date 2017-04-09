@@ -1,0 +1,14 @@
+{
+  "name": "re-enact",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "git@github.com:easyCZ/re-enact.git",
+  "author": "Milan Pavlik <pavlik.mil@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "rollup -w --input app.js --format iife --output bundle.js"
+  },
+  "dependencies": {
+    "rollup-watch": "^3.2.2"
+  }
+}
