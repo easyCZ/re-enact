@@ -15,7 +15,6 @@ class Navbar extends Component {
 class App extends Component {
 
   render() {
-    console.log(Test);
     return createElement(
       'div',
       { style: 'color: red' },
