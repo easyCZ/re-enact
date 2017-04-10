@@ -1,12 +1,12 @@
-import { Component, render, createElement } from './index'
+import ReEnact, { Component } from '../lib'
+
 
 class Navbar extends Component {
 
   render() {
-    return createElement(
-      'nav',
-      { style: 'background-color: yellow; height: 50px' }
-    );
+    return (
+      <nav style={{ backgroundColor: 'yellow', height: '50px' }} />
+    )
   }
 
 }
@@ -15,35 +15,24 @@ class Navbar extends Component {
 class App extends Component {
 
   render() {
-    return createElement(
-      'div',
-      { style: 'color: red' },
-      'Hello World',
-
-      createElement(
-        Navbar,
-        null
-      ),
-
-      createElement(
-        'div',
-        { className: 'testClass' },
-        createElement(
-          'img',
-          {
-            src: 'https://babeljs.io/images/logo.svg',
-            style: 'max-width: 100px'
-          }
-        ),
-        createElement(
-          'p',
-          null,
-          'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor'
-        )
-      )
+    return (
+      <div>
+        Hello World!
+        <Navbar />
+        <div>
+          <img
+            src="https://babeljs.io/images/logo.svg"
+            style={{ maxWidth: '100px'}}
+          />
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+          </p>
+        </div>
+      </div>
     )
   }
 
 }
 
-render(App, '.container');
+
+ReEnact.render(<App />, '.container');
