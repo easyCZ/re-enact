@@ -8,17 +8,36 @@
   "scripts": {
     "server": "static-server",
     "build": "rollup -c",
-    "dev": "rollup -c -w"
+    "dev": "rollup -c -w",
+    "test": "tape -r babel-core/register tests/**/*.js"
   },
   "dependencies": {},
   "devDependencies": {
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-preset-es2017": "^6.24.1",
+    "babel-register": "^6.24.1",
+    "jsdom": "^9.12.0",
+    "jsdom-global": "^2.1.1",
     "rollup": "^0.41.6",
     "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-watch": "^3.2.2",
-    "static-server": "^2.0.4"
+    "static-server": "^2.0.4",
+    "tape": "^4.6.3"
+  },
+  "babel": {
+    "presets": [
+      "es2017"
+    ],
+    "plugins": [
+      "external-helpers",
+      [
+        "transform-react-jsx",
+        {
+          "pragma": "ReEnact.createElement"
+        }
+      ]
+    ]
   }
 }
