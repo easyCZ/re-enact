@@ -10,7 +10,7 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "test": "tape -r babel-core/register tests/**/*.js | faucet",
-    "tdd": "tape-watch -r babel-core/register 'tests/**/*.js' | faucet"
+    "tdd": "tape-watch -r babel-core/register 'tests/**/*.js'"
   },
   "dependencies": {},
   "devDependencies": {

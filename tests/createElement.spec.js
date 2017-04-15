@@ -91,3 +91,21 @@ test('object as a style attribute should be mapped to string', t => {
 
   t.end();
 })
+
+test('style attributes should be hyphenated', t => {
+
+  const elem = createElement('div', {style: { fontSize: 20, borderBottomRightRadius: 5 }});
+  const style = elem.attributes.getNamedItem('style').value;
+  console.log(elem.attributes)
+
+  t.ok(
+    style.indexOf('border-bottom-right-radius: 5') >= 0,
+    'should have border bottom right radius hyphenated');
+
+  t.ok(
+    style.indexOf('font-size: 20') >= 0,
+    'should have font size hyphenated');
+
+  t.end();
+
+})
