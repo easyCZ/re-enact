@@ -14,6 +14,20 @@ class Navbar extends Component {
 
 class App extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      counter: 0
+    }
+
+  }
+
+  componentDidMount() {
+    setInterval(() => this.setState({ counter: this.state.counter + 1}), 1000);
+  }
+
+
   render() {
     return (
       <div>
@@ -25,7 +39,7 @@ class App extends Component {
             style={{ maxWidth: '100px'}}
           />
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+            Counter: { this.state.counter }
           </p>
         </div>
       </div>

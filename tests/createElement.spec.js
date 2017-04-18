@@ -1,6 +1,7 @@
 const test = require('tape');
 const cleanup = require('jsdom-global')()
 const createElement = require('../lib').createElement;
+const Component = require('../lib').Component;
 
 test('create an empty div with no attributes', t => {
 
@@ -27,8 +28,6 @@ test('create an empty div with no attributes', t => {
 test('crate an unknown html element', t => {
 
   const elem = createElement('yay', null);
-
-  console.log(elem)
 
   t.ok(
     elem instanceof HTMLUnknownElement,
@@ -96,7 +95,6 @@ test('style attributes should be hyphenated', t => {
 
   const elem = createElement('div', {style: { fontSize: 20, borderBottomRightRadius: 5 }});
   const style = elem.attributes.getNamedItem('style').value;
-  console.log(elem.attributes)
 
   t.ok(
     style.indexOf('border-bottom-right-radius: 5') >= 0,
@@ -105,6 +103,60 @@ test('style attributes should be hyphenated', t => {
   t.ok(
     style.indexOf('font-size: 20') >= 0,
     'should have font size hyphenated');
+
+  t.end();
+
+})
+
+test('should render a component with children', t => {
+
+  const listItem1 = createElement('li', null, 'hello');
+  const listItem2 = createElement('li', null, 'world')
+  const list = createElement('ul', null, listItem1, listItem2);
+
+  const children = list.children;
+
+  t.equal(
+    children.length,
+    2,
+    'should have two children');
+
+  const first = children[0];
+  const second = children[1];
+
+  t.ok(
+    first instanceof HTMLLIElement,
+    'should be an instance of HTML LI Element')
+
+  t.equal(
+    first.textContent,
+    'hello',
+    'should read hello');
+
+  t.ok(
+    second instanceof HTMLLIElement,
+    'should be an instance of HTML LI Element')
+
+  t.equal(
+    second.textContent,
+    'world',
+    'should read hello');
+
+  t.end();
+
+});
+
+test('should be able to render a ReEnact.Component class', t => {
+
+  class Element extends Component {
+
+    render() {
+      return (<div>hello</div>)
+    }
+
+  }
+
+  const elem = createElement()
 
   t.end();
 
