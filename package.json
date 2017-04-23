@@ -3,47 +3,26 @@
   "version": "0.0.1",
   "main": "index.js",
   "repository": "git@github.com:easyCZ/re-enact.git",
-  "author": "Milan Pavlik <pavlik.mil@gmail.com>",
+  "author": "Milan Pavlik",
   "license": "MIT",
   "scripts": {
-    "server": "static-server",
-    "build": "rollup -c",
+    "server": "webpack-dev-server",
+    "build": "webpack",
     "dev": "rollup -c -w",
-    "test": "tape -r babel-core/register tests/**/*.js | faucet",
-    "tdd": "tape-watch -r babel-core/register -r babel-helpers 'tests/**/*.js'"
+    "test": "tape -r babel-register tests/**/*.js",
+    "tdd": "npm test -- --watch"
   },
   "dependencies": {},
   "devDependencies": {
-    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-loader": "^7.0.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-preset-es2015": "^6.24.1",
-    "babel-preset-es2017": "^6.24.1",
-    "babel-preset-latest": "^6.24.1",
     "babel-register": "^6.24.1",
-    "faucet": "^0.0.1",
     "jsdom": "^9.12.0",
     "jsdom-global": "^2.1.1",
-    "rollup": "^0.41.6",
-    "rollup-plugin-babel": "^2.7.1",
-    "rollup-plugin-node-resolve": "^3.0.0",
-    "rollup-watch": "^3.2.2",
-    "static-server": "^2.0.4",
     "tape": "^4.6.3",
-    "tape-watch": "^2.3.0"
-  },
-  "babel": {
-    "presets": [
-      "es2017",
-      "es2015"
-    ],
-    "plugins": [
-      "external-helpers",
-      [
-        "transform-react-jsx",
-        {
-          "pragma": "ReEnact.createElement"
-        }
-      ]
-    ]
+    "tape-watch": "^2.3.0",
+    "webpack": "^2.4.1",
+    "webpack-dev-server": "^2.4.4"
   }
 }

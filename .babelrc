@@ -1,21 +1,18 @@
 {
   "presets": [
-    [
-      "latest",
-      {
-        "es2015": {
-          "modules": false
-        }
-      }
-    ]
+    "es2015"
   ],
   "plugins": [
-    "external-helpers",
     [
       "transform-react-jsx",
       {
         "pragma": "ReEnact.createElement"
       }
     ]
-  ]
+  ],
+  "env": {
+    "development": {
+      "sourceMaps": "inline"
+    }
+  }
 }

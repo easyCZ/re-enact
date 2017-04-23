@@ -1,23 +1,22 @@
-const test = require('tape');
+import test from 'tape';
 const cleanup = require('jsdom-global')()
-const createElement = require('../lib').createElement;
-const Component = require('../lib').Component;
+import ReEnact, { Component, createElement } from '../lib';
 
 test('create an empty div with no attributes', t => {
 
   const div = createElement('div', null);
 
-  t.equal(
+  t.deepEqual(
     div.nodeName,
     'DIV',
     'should have a node name of "div"');
 
-  t.equal(
+  t.deepEqual(
     0,
     div.attributes.length,
     'should have no attributes');
 
-  t.equal(
+  t.deepEqual(
     0,
     div.children.length,
     'should have no children');
@@ -33,17 +32,17 @@ test('crate an unknown html element', t => {
     elem instanceof HTMLUnknownElement,
     'should be an instance of HTMLUnknownElement')
 
-  t.equal(
+  t.deepEqual(
     elem.nodeName,
     'YAY',
     'should have a node name of "yay"')
 
-  t.equal(
+  t.deepEqual(
     elem.children.length,
     0,
     'should have no children');
 
-  t.equal(
+  t.deepEqual(
     elem.attributes.length,
     0,
     'should have no children');
@@ -59,17 +58,17 @@ test('create a div element with attributes', t => {
     div instanceof HTMLDivElement,
     'should of HTMLDivElement type');
 
-  t.equal(
+  t.deepEqual(
     div.attributes.length,
     2,
     'should have 2 element attributes')
 
-  t.equal(
+  t.deepEqual(
     div.attributes.getNamedItem('width').value,
     '50',
     'should have width set to 50')
 
-  t.equal(
+  t.deepEqual(
     div.attributes.getNamedItem('height').value,
     '60',
     'should have height set to 60');
@@ -116,7 +115,7 @@ test('should render a component with children', t => {
 
   const children = list.children;
 
-  t.equal(
+  t.deepEqual(
     children.length,
     2,
     'should have two children');
@@ -128,7 +127,7 @@ test('should render a component with children', t => {
     first instanceof HTMLLIElement,
     'should be an instance of HTML LI Element')
 
-  t.equal(
+  t.deepEqual(
     first.textContent,
     'hello',
     'should read hello');
@@ -137,7 +136,7 @@ test('should render a component with children', t => {
     second instanceof HTMLLIElement,
     'should be an instance of HTML LI Element')
 
-  t.equal(
+  t.deepEqual(
     second.textContent,
     'world',
     'should read hello');
@@ -146,18 +145,20 @@ test('should render a component with children', t => {
 
 });
 
-test('should be able to render a ReEnact.Component class', t => {
+// test('should be able to render a ReEnact.Component class', t => {
 
-  class Element extends Component {
+//   class Element extends Component {
 
-    render() {
-      return (<div>hello</div>)
-    }
+//     render() {
+//       return (<div>hello</div>)
+//     }
 
-  }
+//   }
 
-  const elem = createElement()
+//   const elem = createElement(<Element />, null)
 
-  t.end();
+//   t.end();
 
-})
+// })
+
+// cleanup();
