@@ -1,10 +1,10 @@
 import test from 'tape';
 const cleanup = require('jsdom-global')()
-import ReEnact, { Component, createElement } from '../lib';
+import ReEnact, { Component, createElement, renderTree } from '../lib';
 
 test('create an empty div with no attributes', t => {
 
-  const div = createElement('div', null);
+  const div = renderTree(createElement('div', null));
 
   t.deepEqual(
     div.nodeName,
@@ -26,7 +26,7 @@ test('create an empty div with no attributes', t => {
 
 test('crate an unknown html element', t => {
 
-  const elem = createElement('yay', null);
+  const elem = renderTree(createElement('yay', null));
 
   t.ok(
     elem instanceof HTMLUnknownElement,
@@ -52,7 +52,7 @@ test('crate an unknown html element', t => {
 
 test('create a div element with attributes', t => {
 
-  const div = createElement('div', { width: 50, height: 60 })
+  const div = renderTree(createElement('div', { width: 50, height: 60 }))
 
   t.ok(
     div instanceof HTMLDivElement,
@@ -77,7 +77,7 @@ test('create a div element with attributes', t => {
 })
 
 test('object as a style attribute should be mapped to string', t => {
-  const div = createElement('div', { style: { height: 50, width: 60 }});
+  const div = renderTree(createElement('div', { style: { height: 50, width: 60 }}));
 
   t.ok(
     div.attributes.getNamedItem('style').value.indexOf('height: 50') >= 0,
@@ -92,7 +92,7 @@ test('object as a style attribute should be mapped to string', t => {
 
 test('style attributes should be hyphenated', t => {
 
-  const elem = createElement('div', {style: { fontSize: 20, borderBottomRightRadius: 5 }});
+  const elem = renderTree(createElement('div', {style: { fontSize: 20, borderBottomRightRadius: 5 }}));
   const style = elem.attributes.getNamedItem('style').value;
 
   t.ok(
@@ -111,9 +111,11 @@ test('should render a component with children', t => {
 
   const listItem1 = createElement('li', null, 'hello');
   const listItem2 = createElement('li', null, 'world')
-  const list = createElement('ul', null, listItem1, listItem2);
+  const list = renderTree(createElement('ul', null, listItem1, listItem2));
 
   const children = list.children;
+
+  console.log(children)
 
   t.deepEqual(
     children.length,

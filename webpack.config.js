@@ -19,7 +19,7 @@ var config = {
       }
     ]
   },
-  devtool: "eval",
+  devtool: "inline-source-map",
   devServer: {
     contentBase: path.join(__dirname, 'public'),
     compress: true,

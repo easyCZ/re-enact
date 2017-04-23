@@ -6,7 +6,7 @@
   "author": "Milan Pavlik",
   "license": "MIT",
   "scripts": {
-    "server": "webpack-dev-server",
+    "start": "webpack-dev-server",
     "build": "webpack",
     "dev": "rollup -c -w",
     "test": "tape -r babel-register tests/**/*.js",

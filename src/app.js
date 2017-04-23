@@ -49,4 +49,4 @@ class App extends Component {
 }
 
 
-ReEnact.render(<App />, '.container');
+ReEnact.render(<App style={{ color: 'red' }} />, '.container');
